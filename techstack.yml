@@ -1,0 +1,308 @@
+repo_name: Sowhat999/evennia
+report_id: ba422d041c4fbf7afab08e023dcf9415
+version: 0.1
+repo_type: Public
+timestamp: '2024-04-15T06:29:43+00:00'
+requested_by: Griatch
+provider: github
+branch: main
+detected_tools_count: 22
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: Jinja
+  description: Full featured template engine for Python
+  website_url: https://palletsprojects.com/p/jinja/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Templating Languages & Extensions
+  image_url: https://img.stackshare.io/service/2303/New_Project__20_.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/docs/requirements.txt
+  detection_source: docs/requirements.txt
+  last_updated_by: Griatch
+  last_updated_on: 2022-11-15 19:46:50.000000000 Z
+- name: Python
+  description: A clear and powerful object-oriented programming language, comparable
+    to Perl, Ruby, Scheme, or Java.
+  website_url: https://www.python.org
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/.github/workflows/codeql-analysis.yml
+  detection_source: ".github/workflows/codeql-analysis.yml"
+  last_updated_by: Griatch
+  last_updated_on: 2022-11-28 10:35:30.000000000 Z
+- name: PyPI
+  description: A repository of software for the Python programming language
+  website_url: https://pypi.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Hosted Package Repository
+  image_url: https://img.stackshare.io/service/12572/-RIWgodF_400x400.jpg
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: Griatch
+  last_updated_on: 2020-07-27 19:09:13.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source_url: https://github.com/Sowhat999/evennia
+  detection_source: Repo Metadata
+- name: autobahn
+  description: WebSocket client &amp; server library, WAMP real-time framework
+  package_url: https://pypi.org/project/autobahn
+  version: 20.7.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20100/default_029b9bbfb6be2cd34bebeda5b8e1e80a1d22441c.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+  vulnerabilities:
+  - name: Open Redirect in autobahn
+    cve_id: CVE-2020-35678
+    cve_url: https://github.com/advisories/GHSA-gwp7-vqr5-h33h
+    detected_date: Aug 22
+    severity: moderate
+    first_patched: 20.12.3
+- name: black
+  description: The uncompromising code formatter
+  package_url: https://pypi.org/project/black
+  version: '22.6'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20099/default_029b9bbfb6be2cd34bebeda5b8e1e80a1d22441c.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+  vulnerabilities:
+  - name: Black vulnerable to Regular Expression Denial of Service (ReDoS)
+    cve_id: CVE-2024-21503
+    cve_url: https://github.com/advisories/GHSA-fj7x-q9j7-g6q6
+    detected_date: Mar 21
+    severity: moderate
+    first_patched: 24.3.0
+- name: django-filter
+  description: Django-filter is a reusable Django application for allowing users to
+    filter querysets dynamically
+  package_url: https://pypi.org/project/django-filter
+  version: '2.4'
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20158/default_31f4acd7a71628261771488a4d0f37f63bff1598.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: django-sekizai
+  description: Django Sekizai
+  package_url: https://pypi.org/project/django-sekizai
+  version: 2.0.0
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/pypi/image.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: djangorestframework
+  description: Web APIs for Django, made easy
+  package_url: https://pypi.org/project/djangorestframework
+  version: '3.14'
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19870/default_d05f6f09935776629f62e8aed365805502c14921.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: inflect
+  description: Correctly generate plurals
+  package_url: https://pypi.org/project/inflect
+  version: 5.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20130/default_5c04115b22cdadfa4cb3de74c5ab15c454f7c405.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: isort
+  description: A Python utility / library to sort Python imports
+  package_url: https://pypi.org/project/isort
+  version: '5.10'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20117/default_9cf91bfbbfb266fc12a914cdc09d9e4b55c773bb.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: mock
+  description: Rolling backport of unittest.mock for all Pythons
+  package_url: https://pypi.org/project/mock
+  version: 4.0.3
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19876/default_8902c10687fbcd6273bdbe119fff40fa1180763f.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: model_mommy
+  description: Smart object creation facility for Django
+  package_url: https://pypi.org/project/model_mommy
+  version: '2.0'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/pypi/image.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: parameterized
+  description: Parameterized testing with any Python test framework
+  package_url: https://pypi.org/project/parameterized
+  version: 0.8.1
+  license: BSD-2-Clause-FreeBSD
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/pypi/image.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: pytz
+  description: World timezone definitions, modern and historical
+  package_url: https://pypi.org/project/pytz
+  version: '2022.6'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/19841/default_bb711fa267b2329ed689711a5adb7d9e74610b20.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: simpleeval
+  description: A simple, safe single expression evaluator library
+  package_url: https://pypi.org/project/simpleeval
+  version: '1.0'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20714/default_9315a80ef1afabd8064bd5f94ebf2a19bc9765f1.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
+- name: uritemplate
+  description: URI templates
+  package_url: https://pypi.org/project/uritemplate
+  version: 4.1.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: PyPI Packages
+  image_url: https://img.stackshare.io/package/20156/default_0a9d6219a6023591895a9db3a2e96da524d7a0a8.png
+  detection_source_url: https://github.com/Sowhat999/evennia/blob/main/pyproject.toml
+  detection_source: pyproject.toml
+  last_updated_by: dvoraen
+  last_updated_on: 2022-12-04 12:05:55.000000000 Z
