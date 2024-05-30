@@ -13,9 +13,9 @@ The script will only send messages to the object it is stored on, so
 make sure to put it on yourself or you won't see any messages!
 
 """
-import random
 
 from evennia import DefaultScript
+import secrets
 
 
 class BodyFunctions(DefaultScript):
@@ -37,13 +37,13 @@ class BodyFunctions(DefaultScript):
         This gets called every self.interval seconds. We make
         a random check here so as to only return 33% of the time.
         """
-        if random.random() < 0.66:
+        if secrets.SystemRandom().random() < 0.66:
             # no message this time
             return
         self.send_random_message()
 
     def send_random_message(self):
-        rand = random.random()
+        rand = secrets.SystemRandom().random()
         # return a random message
         if rand < 0.1:
             string = "You tap your foot, looking around."

@@ -28,6 +28,7 @@ from django.core.management import execute_from_command_line
 from django.db.utils import ProgrammingError
 from twisted.internet import endpoints, reactor
 from twisted.protocols import amp
+import secrets
 
 # Signal processing
 SIG = signal.SIGINT
@@ -1389,7 +1390,6 @@ def create_secret_key():
     Randomly create the secret key for the settings file
 
     """
-    import random
     import string
 
     secret_key = list(
@@ -1399,7 +1399,7 @@ def create_secret_key():
         .replace("{", "_")
         .replace("}", "-")
     )
-    random.shuffle(secret_key)
+    secrets.SystemRandom().shuffle(secret_key)
     secret_key = "".join(secret_key[:40])
     return secret_key
 

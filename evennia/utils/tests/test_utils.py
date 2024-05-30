@@ -6,7 +6,6 @@ TODO: Not nearly all utilities are covered yet.
 """
 
 import os.path
-import random
 from datetime import datetime, timedelta
 
 import mock
@@ -17,6 +16,7 @@ from twisted.internet import task
 from evennia.utils import utils
 from evennia.utils.ansi import ANSIString
 from evennia.utils.test_resources import BaseEvenniaTest
+import secrets
 
 
 class TestIsIter(TestCase):
@@ -323,15 +323,15 @@ class TestFormatGrid(TestCase):
 
     def setUp(self):
         # make the random only semi-random with a fixed seed
-        random.seed(1)
+        secrets.SystemRandom().seed(1)
 
     def tearDown(self):
         # restore normal randomness
-        random.seed(None)
+        secrets.SystemRandom().seed(None)
 
     def _generate_elements(self, basewidth, variation, amount):
         return [
-            "X" * max(1, basewidth + int(random.randint(-variation, variation)))
+            "X" * max(1, basewidth + int(secrets.SystemRandom().randint(-variation, variation)))
             for _ in range(amount)
         ]
 

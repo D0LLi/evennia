@@ -16,7 +16,6 @@ character names from within the menu.
 
 """
 import string
-from random import choices
 
 from django.conf import settings
 
@@ -25,6 +24,7 @@ from evennia.commands.default.muxcommand import MuxAccountCommand
 from evennia.objects.models import ObjectDB
 from evennia.utils import create, search
 from evennia.utils.evmenu import EvMenu
+import secrets
 
 _CHARACTER_TYPECLASS = settings.BASE_CHARACTER_TYPECLASS
 try:
@@ -75,7 +75,7 @@ class ContribCmdCharCreate(MuxAccountCommand):
             default_home = ObjectDB.objects.get_id(settings.DEFAULT_HOME)
             permissions = settings.PERMISSION_ACCOUNT_DEFAULT
             # generate a randomized key so the player can choose a character name later
-            key = "".join(choices(string.ascii_letters + string.digits, k=10))
+            key = "".join(secrets.SystemRandom().choices(string.ascii_letters + string.digits, k=10))
             new_character = create.create_object(
                 _CHARACTER_TYPECLASS,
                 key=key,

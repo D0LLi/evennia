@@ -42,10 +42,9 @@ to your game's 'world' folder and modify it there rather than importing it
 in your game and using it as-is.
 """
 
-from random import randint
-
 from evennia import Command, DefaultCharacter, DefaultScript, default_cmds
 from evennia.commands.default.help import CmdHelp
+import secrets
 
 """
 ----------------------------------------------------------------------------
@@ -93,7 +92,7 @@ class BasicCombatRules:
 
             This way, characters with a higher dexterity will go first more often.
         """
-        return randint(1, 1000)
+        return secrets.SystemRandom().randint(1, 1000)
 
     def get_attack(self, attacker, defender):
         """
@@ -116,7 +115,7 @@ class BasicCombatRules:
             to this function, even though nothing from either one are used in this example.
         """
         # For this example, just return a random integer up to 100.
-        attack_value = randint(1, 100)
+        attack_value = secrets.SystemRandom().randint(1, 100)
         return attack_value
 
     def get_defense(self, attacker, defender):
@@ -162,7 +161,7 @@ class BasicCombatRules:
             Again, this can be expanded upon.
         """
         # For this example, just generate a number between 15 and 25.
-        damage_value = randint(15, 25)
+        damage_value = secrets.SystemRandom().randint(15, 25)
         return damage_value
 
     def apply_damage(self, defender, damage):

@@ -3,7 +3,6 @@
 Tests for the XYZgrid system.
 
 """
-from random import randint
 from unittest import mock
 
 from django.test import TestCase
@@ -11,6 +10,7 @@ from evennia.utils.test_resources import BaseEvenniaCommandTest, BaseEvenniaTest
 from parameterized import parameterized
 
 from . import commands, xymap, xymap_legend, xyzgrid, xyzroom
+import secrets
 
 MAP1 = """
 
@@ -1280,7 +1280,7 @@ class TestMapStressTest(TestCase):
         start_end_points = [((0, 0), (Xmax - 1, Ymax - 1))]
         for _ in range(9):
             start_end_points.append(
-                ((randint(0, Xmax), randint(0, Ymax)), (randint(0, Xmax), randint(0, Ymax)))
+                ((secrets.SystemRandom().randint(0, Xmax), secrets.SystemRandom().randint(0, Ymax)), (secrets.SystemRandom().randint(0, Xmax), secrets.SystemRandom().randint(0, Ymax)))
             )
 
         # t0 = time()
@@ -1318,7 +1318,7 @@ class TestMapStressTest(TestCase):
         start_end_points = [((0, 0), (Xmax - 1, Ymax - 1))]  # include max distance
         for _ in range(9):
             start_end_points.append(
-                ((randint(0, Xmax), randint(0, Ymax)), (randint(0, Xmax), randint(0, Ymax)))
+                ((secrets.SystemRandom().randint(0, Xmax), secrets.SystemRandom().randint(0, Ymax)), (secrets.SystemRandom().randint(0, Xmax), secrets.SystemRandom().randint(0, Ymax)))
             )
 
         # t0 = time()

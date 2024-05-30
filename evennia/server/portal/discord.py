@@ -11,7 +11,6 @@ added to `server/conf/secret_settings.py` as your  DISCORD_BOT_TOKEN
 import json
 import os
 from io import BytesIO
-from random import random
 
 from autobahn.twisted.websocket import (
     WebSocketClientFactory,
@@ -26,6 +25,7 @@ from twisted.web.http_headers import Headers
 from evennia.server.session import Session
 from evennia.utils import class_from_module, get_evennia_version, logger
 from evennia.utils.utils import delay
+import secrets
 
 _BASE_SESSION_CLASS = class_from_module(settings.BASE_SESSION_CLASS)
 
@@ -276,7 +276,7 @@ class DiscordClient(WebSocketClientProtocol, _BASE_SESSION_CLASS):
             if self.nextHeartbeatCall:
                 self.nextHeartbeatCall.cancel()
             self.nextHeartbeatCall = self.factory._batched_timer.call_later(
-                self.interval * random(),
+                self.interval * secrets.SystemRandom().random(),
                 self.doHeartbeat,
             )
             if self.session_id:

@@ -31,10 +31,10 @@ Timers are handled by persistent delays on the button. These are examples of
 such as when closing the lid and un-blinding a character.
 
 """
-import random
 
 from evennia import CmdSet, Command, DefaultObject
 from evennia.utils.utils import delay, interactive, repeat
+import secrets
 
 # Commands on the button (not all awailable at the same time)
 
@@ -87,7 +87,7 @@ class CmdNudge(Command):
         Nudge the lid. Random chance of success to open it.
 
         """
-        rand = random.random()
+        rand = secrets.SystemRandom().random()
         if rand < 0.5:
             self.caller.msg("You nudge at the lid. It seems stuck.")
         elif rand < 0.7:
@@ -119,7 +119,7 @@ class CmdSmashGlass(Command):
         break.
 
         """
-        rand = random.random()
+        rand = secrets.SystemRandom().random()
         self.caller.location.msg_contents(
             f"{self.caller.name} tries to smash the glass of the button.", exclude=self.caller
         )
@@ -468,7 +468,7 @@ class RedButton(DefaultObject):
         """
         if self.location and self.db.lamp_works:
             possible_messages = self.db.blink_msgs or self.blink_msgs
-            self.location.msg_contents(random.choice(possible_messages))
+            self.location.msg_contents(secrets.choice(possible_messages))
 
     def _set_desc(self, attrname=None):
         """

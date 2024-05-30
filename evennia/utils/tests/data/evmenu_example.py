@@ -4,7 +4,7 @@
 #
 # -------------------------------------------------------------
 
-import random
+import secrets
 
 
 def _generate_goto(caller, **kwargs):
@@ -146,7 +146,7 @@ def _test_call(caller, raw_input, **kwargs):
     )
 
     if mode == "exec":
-        kwargs = {"random": random.random()}
+        kwargs = {"random": secrets.SystemRandom().random()}
         caller.msg("function modify kwargs to {}".format(kwargs))
     else:
         caller.msg("|ypassing function kwargs without modification.|n")
@@ -164,11 +164,11 @@ def test_dynamic_node(caller, **kwargs):
     options = (
         {
             "desc": "pass a new random number to this node",
-            "goto": ("test_dynamic_node", {"random": random.random()}),
+            "goto": ("test_dynamic_node", {"random": secrets.SystemRandom().random()}),
         },
         {
             "desc": "execute a func with kwargs",
-            "exec": (_test_call, {"mode": "exec", "test_random": random.random()}),
+            "exec": (_test_call, {"mode": "exec", "test_random": secrets.SystemRandom().random()}),
         },
         {"desc": "dynamic_goto", "goto": (_test_call, {"mode": "goto", "goto_input": "test"})},
         {

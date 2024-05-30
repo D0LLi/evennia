@@ -100,12 +100,11 @@ to your game's 'world' folder and modify it there rather than importing it
 in your game and using it as-is.
 """
 
-from random import randint
-
 from evennia import Command, DefaultObject, DefaultScript, default_cmds
 from evennia.commands.default.help import CmdHelp
 
 from . import tb_basic
+import secrets
 
 """
 ----------------------------------------------------------------------------
@@ -147,7 +146,7 @@ class RangedCombatRules(tb_basic.BasicCombatRules):
             to this function, even though nothing from either one are used in this example.
         """
         # For this example, just return a random integer up to 100.
-        attack_value = randint(1, 100)
+        attack_value = secrets.SystemRandom().randint(1, 100)
         # Make melee attacks more accurate, ranged attacks less accurate
         if attack_type == "melee":
             attack_value += 15
@@ -440,7 +439,7 @@ class TBRangeTurnHandler(tb_basic.TBBasicTurnHandler):
         contents.remove(to_init)
         # If no anchor object given, pick one in the room at random.
         if not anchor_obj:
-            anchor_obj = contents[randint(0, (len(contents) - 1))]
+            anchor_obj = contents[secrets.SystemRandom().randint(0, (len(contents) - 1))]
         # Copy the range values from the anchor object.
         to_init.db.combat_range = anchor_obj.db.combat_range
         # Add the new object to everyone else's ranges.
