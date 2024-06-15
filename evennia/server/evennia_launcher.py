@@ -28,6 +28,7 @@ from django.core.management import execute_from_command_line
 from django.db.utils import ProgrammingError
 from twisted.internet import endpoints, reactor
 from twisted.protocols import amp
+from security import safe_command
 
 # Signal processing
 SIG = signal.SIGINT
@@ -868,9 +869,9 @@ def start_evennia(pprofiler=False, sprofiler=False):
             if _is_windows():
                 # Windows requires special care
                 create_no_window = 0x08000000
-                Popen(portal_cmd, env=getenv(), bufsize=-1, creationflags=create_no_window)
+                safe_command.run(Popen, portal_cmd, env=getenv(), bufsize=-1, creationflags=create_no_window)
             else:
-                Popen(portal_cmd, env=getenv(), bufsize=-1)
+                safe_command.run(Popen, portal_cmd, env=getenv(), bufsize=-1)
         except Exception as e:
             print(PROCESS_ERROR.format(component="Portal", traceback=e))
             _reactor_stop()
@@ -1015,7 +1016,7 @@ def start_server_interactive():
         server_twistd_cmd.append("--nodaemon")
         print("Beginner-Tutorial Server in interactive mode (stop with Ctrl-C)...")
         try:
-            Popen(server_twistd_cmd, env=getenv(), stderr=STDOUT).wait()
+            safe_command.run(Popen, server_twistd_cmd, env=getenv(), stderr=STDOUT).wait()
         except KeyboardInterrupt:
             print("... Stopped Server with Ctrl-C.")
         else:
@@ -1047,13 +1048,13 @@ def start_portal_interactive():
         if _is_windows():
             # Windows requires special care
             create_no_window = 0x08000000
-            Popen(server_twistd_cmd, env=getenv(), bufsize=-1, creationflags=create_no_window)
+            safe_command.run(Popen, server_twistd_cmd, env=getenv(), bufsize=-1, creationflags=create_no_window)
         else:
-            Popen(server_twistd_cmd, env=getenv(), bufsize=-1)
+            safe_command.run(Popen, server_twistd_cmd, env=getenv(), bufsize=-1)
 
         print("Beginner-Tutorial Portal in interactive mode (stop with Ctrl-C)...")
         try:
-            Popen(portal_twistd_cmd, env=getenv(), stderr=STDOUT).wait()
+            safe_command.run(Popen, portal_twistd_cmd, env=getenv(), stderr=STDOUT).wait()
         except KeyboardInterrupt:
             print("... Stopped Portal with Ctrl-C.")
         else:
@@ -1933,7 +1934,7 @@ def run_dummyrunner(number_of_dummies):
     if os.path.exists(config_file):
         cmdstr.extend(["--config", config_file])
     try:
-        call(cmdstr, env=getenv())
+        safe_command.run(call, cmdstr, env=getenv())
     except KeyboardInterrupt:
         # this signals the dummyrunner to stop cleanly and should
         # not lead to a traceback here.
@@ -2098,12 +2099,11 @@ def run_menu():
             query_info()
         elif inp == 12:
             print("Running 'evennia --settings settings.py test .' ...")
-            Popen(
-                [sys.executable, __file__, "--settings", "settings.py", "test", "."], env=getenv()
+            safe_command.run(Popen, [sys.executable, __file__, "--settings", "settings.py", "test", "."], env=getenv()
             ).wait()
         elif inp == 13:
             print("Running 'evennia test evennia' ...")
-            Popen([sys.executable, __file__, "test", "evennia"], env=getenv()).wait()
+            safe_command.run(Popen, [sys.executable, __file__, "test", "evennia"], env=getenv()).wait()
         else:
             print("Not a valid option.")
             continue
