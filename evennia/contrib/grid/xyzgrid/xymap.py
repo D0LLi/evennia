@@ -97,6 +97,7 @@ from collections import defaultdict
 from os import mkdir
 from os.path import isdir, isfile
 from os.path import join as pathjoin
+import fickling
 
 try:
     from scipy import zeros
@@ -611,7 +612,7 @@ class XYMap:
             mapstr, dist_matrix, pathfinding_routes = "", None, None
             with open(self.pathfinder_baked_filename, "rb") as fil:
                 try:
-                    mapstr, dist_matrix, pathfinding_routes = pickle.load(fil)
+                    mapstr, dist_matrix, pathfinding_routes = fickling.load(fil)
                 except Exception:
                     logger.log_trace()
             if (
