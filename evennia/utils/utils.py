@@ -13,7 +13,6 @@ import importlib.util
 import inspect
 import math
 import os
-import random
 import re
 import sys
 import textwrap
@@ -41,6 +40,7 @@ from simpleeval import simple_eval
 from twisted.internet import reactor, threads
 from twisted.internet.defer import returnValue  # noqa - used as import target
 from twisted.internet.task import deferLater
+import secrets
 
 _MULTIMATCH_TEMPLATE = settings.SEARCH_MULTIMATCH_TEMPLATE
 _EVENNIA_DIR = settings.EVENNIA_DIR
@@ -1529,7 +1529,7 @@ def random_string_from_module(module):
     Returns:
         random (string): A random stribg variable from `module`.
     """
-    return random.choice(string_from_module(module))
+    return secrets.choice(string_from_module(module))
 
 
 def fuzzy_import_from_module(path, variable, default=None, defaultpaths=None):

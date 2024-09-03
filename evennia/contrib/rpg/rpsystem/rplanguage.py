@@ -139,10 +139,10 @@ that never change (if this is desired).
 """
 import re
 from collections import defaultdict
-from random import choice, randint
 
 from evennia import DefaultScript
 from evennia.utils import logger
+import secrets
 
 # ------------------------------------------------------------
 #
@@ -324,16 +324,16 @@ class LanguageHandler(DefaultScript):
                 word = word.strip()
                 lword = len(word)
                 new_word = ""
-                wlen = max(0, lword + sum(randint(-1, 1) for i in range(word_length_variance)))
+                wlen = max(0, lword + sum(secrets.SystemRandom().randint(-1, 1) for i in range(word_length_variance)))
                 if wlen not in grammar:
                     # always create a translation, use random length
-                    structure = choice(grammar[choice(list(grammar))])
+                    structure = secrets.choice(grammar[secrets.choice(list(grammar))])
                 else:
                     # use the corresponding length
-                    structure = choice(grammar[wlen])
+                    structure = secrets.choice(grammar[wlen])
                 for match in _RE_GRAMMAR.finditer(structure):
                     try:
-                        new_word += choice(grammar2phonemes[match.group()])
+                        new_word += secrets.choice(grammar2phonemes[match.group()])
                     except IndexError:
                         raise IndexError(
                             "Could not find a matching phoneme for the grammar "
@@ -397,25 +397,25 @@ class LanguageHandler(DefaultScript):
                 wlen = max(
                     0,
                     lword
-                    + sum(randint(-1, 1) for i in range(self.language["word_length_variance"])),
+                    + sum(secrets.SystemRandom().randint(-1, 1) for i in range(self.language["word_length_variance"])),
                 )
                 grammar = self.language["grammar"]
                 if wlen not in grammar:
-                    if randint(0, 1) == 0:
+                    if secrets.SystemRandom().randint(0, 1) == 0:
                         # this word has no direct translation!
                         wlen = 0
                         new_word = ""
                     else:
                         # use random word length
-                        wlen = choice(list(grammar.keys()))
+                        wlen = secrets.choice(list(grammar.keys()))
 
                 if wlen:
-                    structure = choice(grammar[wlen])
+                    structure = secrets.choice(grammar[wlen])
                     grammar2phonemes = self.language["grammar2phonemes"]
                     for match in _RE_GRAMMAR.finditer(structure):
                         # there are only four combinations: vv,cc,c,v
                         try:
-                            new_word += choice(grammar2phonemes[match.group()])
+                            new_word += secrets.choice(grammar2phonemes[match.group()])
                         except KeyError:
                             logger.log_trace(
                                 "You need to supply at least one example of each of "

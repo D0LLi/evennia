@@ -6,7 +6,6 @@ OLC Prototype menu nodes
 
 import json
 import re
-from random import choice
 
 from django.conf import settings
 from django.db.models import Q
@@ -18,6 +17,7 @@ from evennia.prototypes import spawner
 from evennia.utils import evmore, utils
 from evennia.utils.ansi import strip_ansi
 from evennia.utils.evmenu import EvMenu, list_node
+import secrets
 
 # ------------------------------------------------------------
 #
@@ -2280,7 +2280,7 @@ def node_apply_diff(caller, **kwargs):
 
     if not diff:
         # use one random object as a reference to calculate a diff
-        base_obj = choice(update_objects)
+        base_obj = secrets.choice(update_objects)
 
         diff, obj_prototype = spawner.prototype_diff_from_object(prototype, base_obj)
 

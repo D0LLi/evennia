@@ -54,11 +54,10 @@ to your game's 'world' folder and modify it there rather than importing it
 in your game and using it as-is.
 """
 
-from random import randint
-
 from evennia import Command, DefaultObject, default_cmds
 
 from . import tb_basic
+import secrets
 
 """
 ----------------------------------------------------------------------------
@@ -101,7 +100,7 @@ class EquipmentCombatRules(tb_basic.BasicCombatRules):
             change this paradigm completely in your own game.
         """
         # Start with a roll from 1 to 100.
-        attack_value = randint(1, 100)
+        attack_value = secrets.SystemRandom().randint(1, 100)
         accuracy_bonus = 0
         # If armed, add weapon's accuracy bonus.
         if attacker.db.wielded_weapon:
@@ -163,11 +162,10 @@ class EquipmentCombatRules(tb_basic.BasicCombatRules):
         if attacker.db.wielded_weapon:
             weapon = attacker.db.wielded_weapon
             # Roll between minimum and maximum damage
-            damage_value = randint(weapon.db.damage_range[0], weapon.db.damage_range[1])
+            damage_value = secrets.SystemRandom().randint(weapon.db.damage_range[0], weapon.db.damage_range[1])
         # Use attacker's unarmed damage otherwise
         else:
-            damage_value = randint(
-                attacker.db.unarmed_damage_range[0], attacker.db.unarmed_damage_range[1]
+            damage_value = secrets.SystemRandom().randint(attacker.db.unarmed_damage_range[0], attacker.db.unarmed_damage_range[1]
             )
         # If defender is armored, reduce incoming damage
         if defender.db.worn_armor:

@@ -58,10 +58,10 @@ dice.roll("3d10 + 2")
 """
 import re
 from ast import literal_eval
-from random import randint
 
 from evennia import CmdSet, default_cmds
 from evennia.utils.utils import simple_eval
+import secrets
 
 
 def roll(
@@ -189,7 +189,7 @@ def roll(
         raise TypeError(f"Invalid die-size used (must be between 1 and {max_dicetype} sides).")
 
     # roll all dice, remembering each roll
-    rolls = tuple([randint(1, dicetype) for _ in range(dicenum)])
+    rolls = tuple([secrets.SystemRandom().randint(1, dicetype) for _ in range(dicenum)])
     result = sum(rolls)
 
     if modifier_string:

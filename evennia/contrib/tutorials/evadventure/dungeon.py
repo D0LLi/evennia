@@ -22,7 +22,6 @@ can choose which exit to leave through.
 
 from datetime import datetime, timedelta
 from math import sqrt
-from random import randint, random, shuffle
 
 from evennia.objects.objects import DefaultExit
 from evennia.scripts.scripts import DefaultScript
@@ -31,6 +30,7 @@ from evennia.utils import create, search
 from evennia.utils.utils import inherits_from
 
 from .rooms import EvAdventureRoom
+import secrets
 
 # aliases for cardinal directions
 _AVAILABLE_DIRECTIONS = [
@@ -327,12 +327,12 @@ class EvAdventureDungeonOrchestrator(DefaultScript):
             # we have a budget of unexplored exits to open
             n_exits = min(self.max_new_exits_per_room, self.max_unexplored_exits)
             if n_exits > 1:
-                n_exits = randint(1, n_exits)
+                n_exits = secrets.SystemRandom().randint(1, n_exits)
             available_directions = [
                 direction for direction in _AVAILABLE_DIRECTIONS if direction != back_exit_key
             ]
             # randomize order of exits
-            shuffle(available_directions)
+            secrets.SystemRandom().shuffle(available_directions)
             for _ in range(n_exits):
                 while available_directions:
                     # get a random direction and check so there isn't a room already
@@ -415,7 +415,7 @@ class EvAdventureStartRoomResetter(DefaultScript):
         """
         room = self.obj
         for exi in room.exits:
-            if inherits_from(exi, EvAdventureDungeonStartRoomExit) and random() < 0.5:
+            if inherits_from(exi, EvAdventureDungeonStartRoomExit) and secrets.SystemRandom().random() < 0.5:
                 exi.reset_exit()
 
 

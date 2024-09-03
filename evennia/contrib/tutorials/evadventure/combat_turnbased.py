@@ -17,9 +17,6 @@ action that takes several vulnerable turns to complete.
 ----
 
 """
-
-
-import random
 from collections import defaultdict
 
 from evennia import AttributeProperty, CmdSet, Command, EvMenu
@@ -36,6 +33,7 @@ from .combat_base import (
     EvAdventureCombatBaseHandler,
 )
 from .enums import Ability
+import secrets
 
 
 # turnbased-combat needs the flee action too
@@ -346,7 +344,7 @@ class EvAdventureTurnbasedCombatHandler(EvAdventureCombatBaseHandler):
             allies, enemies = (), ()
         else:
             # grab a random survivor and check of they have any living enemies.
-            surviving_combatant = random.choice(list(self.combatants.keys()))
+            surviving_combatant = secrets.choice(list(self.combatants.keys()))
             allies, enemies = self.get_sides(surviving_combatant)
 
         if not enemies:
@@ -375,7 +373,7 @@ class EvAdventureTurnbasedCombatHandler(EvAdventureCombatBaseHandler):
         self.turn += 1
         # random turn order
         combatants = list(self.combatants.keys())
-        random.shuffle(combatants)  # shuffles in place
+        secrets.SystemRandom().shuffle(combatants)  # shuffles in place
 
         # do everyone's next queued combat action
         for combatant in combatants:

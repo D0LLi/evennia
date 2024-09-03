@@ -9,9 +9,6 @@ in a separate module (e.g. if they could have been re-used elsewhere.)
 
 """
 
-
-import random
-
 # the system error-handling module is defined in the settings. We load the
 # given setting here using utils.object_from_module. This way we can use
 # it regardless of if we change settings later.
@@ -31,6 +28,7 @@ from evennia import (
 )
 
 from .objects import LightSource
+import secrets
 
 _SEARCH_AT_RESULT = utils.object_from_module(settings.SEARCH_AT_RESULT)
 
@@ -377,7 +375,7 @@ class WeatherRoom(TutorialRoom):
         # subscribe ourselves to a ticker to repeatedly call the hook
         # "update_weather" on this object. The interval is randomized
         # so as to not have all weather rooms update at the same time.
-        self.db.interval = random.randint(50, 70)
+        self.db.interval = secrets.SystemRandom().randint(50, 70)
         TICKER_HANDLER.add(
             interval=self.db.interval, callback=self.update_weather, idstring="tutorial"
         )
@@ -392,9 +390,9 @@ class WeatherRoom(TutorialRoom):
         any arguments and keyword arguments (hence the *args, **kwargs
         even though we don't actually use them in this example)
         """
-        if random.random() < 0.2:
+        if secrets.SystemRandom().random() < 0.2:
             # only update 20 % of the time
-            self.msg_contents("|w%s|n" % random.choice(WEATHER_STRINGS))
+            self.msg_contents("|w%s|n" % secrets.choice(WEATHER_STRINGS))
 
 
 SUPERUSER_WARNING = (
@@ -652,7 +650,7 @@ class CmdLookBridge(Command):
         message = "|c%s|n\n%s\n%s" % (
             location.key,
             BRIDGE_POS_MESSAGES[bridge_position],
-            random.choice(BRIDGE_MOODS),
+            secrets.choice(BRIDGE_MOODS),
         )
 
         chars = [obj for obj in self.obj.contents_get(exclude=caller) if obj.has_account]
@@ -663,7 +661,7 @@ class CmdLookBridge(Command):
 
         # there is a chance that we fall if we are on the western or central
         # part of the bridge.
-        if bridge_position < 3 and random.random() < 0.05 and not self.caller.is_superuser:
+        if bridge_position < 3 and secrets.SystemRandom().random() < 0.05 and not self.caller.is_superuser:
             # we fall 5% of time.
             fall_exit = search_object(self.obj.db.fall_exit)
             if fall_exit:
@@ -776,9 +774,9 @@ class BridgeRoom(WeatherRoom):
         This is called at irregular intervals and makes the passage
         over the bridge a little more interesting.
         """
-        if random.random() < 80:
+        if secrets.SystemRandom().random() < 80:
             # send a message most of the time
-            self.msg_contents("|w%s|n" % random.choice(BRIDGE_WEATHER))
+            self.msg_contents("|w%s|n" % secrets.choice(BRIDGE_WEATHER))
 
     def at_object_receive(self, character, source_location, move_type="move", **kwargs):
         """
@@ -884,9 +882,9 @@ class CmdLookDark(Command):
             nr_searches = 0
             caller.ndb.dark_searches = nr_searches
 
-        if nr_searches < 4 and random.random() < 0.90:
+        if nr_searches < 4 and secrets.SystemRandom().random() < 0.90:
             # we don't find anything
-            caller.msg(random.choice(DARK_MESSAGES))
+            caller.msg(secrets.choice(DARK_MESSAGES))
             caller.ndb.dark_searches += 1
         else:
             # we could have found something!

@@ -66,13 +66,12 @@ to your game's 'world' folder and modify it there rather than importing it
 in your game and using it as-is.
 """
 
-from random import randint
-
 from evennia import Command, DefaultScript, create_object, default_cmds
 from evennia.commands.default.muxcommand import MuxCommand
 from evennia.utils.logger import log_trace
 
 from . import tb_basic
+import secrets
 
 """
 ----------------------------------------------------------------------------
@@ -115,7 +114,7 @@ class MagicCombatRules(tb_basic.BasicCombatRules):
             max_healing = kwargs["healing_range"][1]
 
         for character in targets:
-            to_heal = randint(min_healing, max_healing)  # Restore 20 to 40 hp
+            to_heal = secrets.SystemRandom().randint(min_healing, max_healing)  # Restore 20 to 40 hp
             if character.db.hp + to_heal > character.db.max_hp:
                 to_heal = character.db.max_hp - character.db.hp  # Cap healing to max HP
             character.db.hp += to_heal
@@ -186,10 +185,10 @@ class MagicCombatRules(tb_basic.BasicCombatRules):
 
         # Resolve attack for each target
         for fighter in to_attack:
-            attack_value = randint(1, 100) + accuracy  # Spell attack roll
+            attack_value = secrets.SystemRandom().randint(1, 100) + accuracy  # Spell attack roll
             defense_value = self.get_defense(caster, fighter)
             if attack_value >= defense_value:
-                spell_dmg = randint(min_damage, max_damage)  # Get spell damage
+                spell_dmg = secrets.SystemRandom().randint(min_damage, max_damage)  # Get spell damage
                 total_hits[fighter] += 1
                 total_damage[fighter] += spell_dmg
 

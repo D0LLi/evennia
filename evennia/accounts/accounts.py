@@ -12,7 +12,6 @@ instead for most things).
 """
 import re
 import time
-from random import getrandbits
 
 from django.conf import settings
 from django.contrib.auth import authenticate, password_validation
@@ -39,6 +38,7 @@ from evennia.typeclasses.models import TypeclassBase
 from evennia.utils import class_from_module, create, logger
 from evennia.utils.optionhandler import OptionHandler
 from evennia.utils.utils import is_iter, lazy_property, make_iter, to_str, variable_from_module
+import secrets
 
 __all__ = ("DefaultAccount", "DefaultGuest")
 
@@ -1759,7 +1759,7 @@ class DefaultGuest(DefaultAccount):
                 return None, errors
             else:
                 # build a new account with the found guest username
-                password = "%016x" % getrandbits(64)
+                password = "%016x" % secrets.SystemRandom().getrandbits(64)
                 home = settings.GUEST_HOME
                 permissions = settings.PERMISSION_GUEST_DEFAULT
                 typeclass = settings.BASE_GUEST_TYPECLASS

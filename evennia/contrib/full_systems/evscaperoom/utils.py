@@ -7,10 +7,10 @@ and does not need to be imported from here.
 """
 
 import re
-from random import choice
 
 from evennia import create_object, search_object
 from evennia.utils import inherits_from, justify
+import secrets
 
 _BASE_TYPECLASS_PATH = "evscaperoom.objects."
 _RE_PERSPECTIVE = re.compile(r"~(\w+)", re.I + re.U + re.M)
@@ -85,9 +85,9 @@ def create_fantasy_word(length=5, capitalize=True):
         "uh uw a e i u y p b t d f v t dh "
         "s z sh zh ch jh k ng g m n l r w"
     ).split()
-    word = [choice(phonemes)]
+    word = [secrets.choice(phonemes)]
     while len(word) < length:
-        word.append(choice(phonemes))
+        word.append(secrets.choice(phonemes))
     # it's possible to exceed length limit due to double consonants
     word = "".join(word)[:length]
     return word.capitalize() if capitalize else word

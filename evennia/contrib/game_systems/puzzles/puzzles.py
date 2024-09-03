@@ -72,7 +72,6 @@ are spawened on their corresponding location.
 """
 
 import itertools
-from random import choice
 
 from evennia import (
     CmdSet,
@@ -86,6 +85,7 @@ from evennia.commands.default.muxcommand import MuxCommand
 from evennia.prototypes.spawner import spawn
 from evennia.utils import logger, search, utils
 from evennia.utils.utils import inherits_from
+import secrets
 
 # Tag used by puzzles
 _PUZZLES_TAG_CATEGORY = "puzzles"
@@ -696,7 +696,7 @@ class CmdUsePuzzleParts(MuxCommand):
                 "Your gears start turning and %d different ideas come to your mind ...\n"
                 % (len(largest_puzzles))
             )
-            puzzletuple = choice(largest_puzzles)
+            puzzletuple = secrets.choice(largest_puzzles)
             puzzle = puzzles_dict[puzzletuple[0]]
             caller.msg("You try %s ..." % (puzzle.db.puzzle_name))
 

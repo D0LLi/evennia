@@ -41,7 +41,6 @@ typeclass or use the `typeclass` command to swap existing rooms.
 """
 
 import datetime
-import random
 import re
 from collections import deque
 
@@ -59,6 +58,7 @@ from evennia import (
 )
 from evennia.typeclasses.attributes import AttributeProperty
 from evennia.utils.utils import list_to_string, repeat
+import secrets
 
 # error return function, needed by Extended Look command
 _AT_SEARCH_RESULT = utils.variable_from_module(*settings.SEARCH_AT_RESULT.rsplit(".", 1))
@@ -215,7 +215,7 @@ class ExtendedRoom(DefaultRoom):
         we will randomize which one to send.
 
         """
-        self.msg_contents(random.choice(self.room_messages))
+        self.msg_contents(secrets.choice(self.room_messages))
 
     def get_time_of_day(self):
         """

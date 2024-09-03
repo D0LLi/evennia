@@ -3,9 +3,6 @@ Test map builder.
 
 """
 
-import random
-from random import randint
-
 from typeclasses import exits, rooms
 
 # Add the necessary imports for your instructions here.
@@ -13,6 +10,7 @@ from evennia import create_object
 from evennia.commands.default.tests import BaseEvenniaCommandTest
 
 from . import mapbuilder
+import secrets
 
 # -*- coding: utf-8 -*-
 
@@ -56,10 +54,10 @@ def example1_build_mountains(x, y, **kwargs):
         "Your path is surrounded by sheer cliffs",
         "Haven't you seen that rock before?",
     ]
-    room.db.desc = random.choice(room_desc)
+    room.db.desc = secrets.choice(room_desc)
 
     # Create a random number of objects to populate the room.
-    for i in range(randint(0, 3)):
+    for i in range(secrets.SystemRandom().randint(0, 3)):
         rock = create_object(key="Rock", location=room)
         rock.db.desc = "An ordinary rock."
 

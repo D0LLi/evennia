@@ -19,11 +19,10 @@ TutorialWeaponRack
 
 """
 
-import random
-
 from evennia import CmdSet, Command, DefaultExit, DefaultObject
 from evennia.prototypes.spawner import spawn
 from evennia.utils import dedent, delay, search
+import secrets
 
 # -------------------------------------------------------------
 #
@@ -241,7 +240,7 @@ class Obelisk(TutorialObject):
         """
         # randomly get the index for one of the descriptions
         descs = self.db.puzzle_descs
-        clueindex = random.randint(0, len(descs) - 1)
+        clueindex = secrets.SystemRandom().randint(0, len(descs) - 1)
         # set this description, with the random extra
         string = (
             "The surface of the obelisk seem to waver, shift and writhe under your gaze, with "
@@ -786,7 +785,7 @@ class CrumblingWall(TutorialObject, DefaultExit):
             {"yellow": 1, "green": 0, "red": 0, "blue": 0},
             {"yellow": 0, "green": 0, "red": 0, "blue": 1},
         ]
-        self.db.root_pos = random.choice(start_pos)
+        self.db.root_pos = secrets.choice(start_pos)
 
 
 # -------------------------------------------------------------
@@ -899,7 +898,7 @@ class CmdAttack(Command):
             target.msg("|GYou defend, trying to avoid the attack.|n")
             hit *= 0.5
 
-        if random.random() <= hit:
+        if secrets.SystemRandom().random() <= hit:
             self.caller.msg(string + "|gIt's a hit!|n")
             target.msg(tstring + "|rIt's a hit!|n")
             self.caller.location.msg_contents(
@@ -1176,7 +1175,7 @@ class TutorialWeaponRack(TutorialObject):
         if caller.tags.get(rack_id, category="tutorial_world"):
             caller.msg(self.db.no_more_weapons_msg)
         else:
-            prototype = random.choice(self.db.available_weapons)
+            prototype = secrets.choice(self.db.available_weapons)
             # use the spawner to create a new Weapon from the
             # spawner dictionary, tag the caller
             wpn = spawn(WEAPON_PROTOTYPES[prototype], prototype_parents=WEAPON_PROTOTYPES)[0]

@@ -69,11 +69,10 @@ just mocked for the example.
 
 """
 
-from random import randint, random
-
 from evennia.commands.command import Command, InterruptCommand
 
 from .crafting import CraftingRecipe, CraftingValidationError, craft
+import secrets
 
 # ------------------------------------------------------------
 # Sword recipe
@@ -154,7 +153,7 @@ class _SwordSmithingBaseRecipe(CraftingRecipe):
             crafting.CraftingError to abort craft process on failure).
 
         """
-        if random.random() < 0.8:
+        if secrets.SystemRandom().random() < 0.8:
             # 80% chance of success. This will spawn the sword and show
             # success-message.
             return super().craft(**kwargs)
@@ -416,7 +415,7 @@ class _MagicRecipe(CraftingRecipe):
 
         """
         # we do a simple skill check here.
-        if randint(1, 18) <= self.skill_roll_value:
+        if secrets.SystemRandom().randint(1, 18) <= self.skill_roll_value:
             # a success!
             return True, self.desired_effects
         else:
