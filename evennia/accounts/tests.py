@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from random import randint
 from unittest import TestCase
 
 from django.test import override_settings
@@ -15,6 +14,7 @@ from evennia.accounts.accounts import (
 from evennia.utils import create
 from evennia.utils.test_resources import BaseEvenniaTest
 from evennia.utils.utils import uses_database
+import secrets
 
 
 class TestAccountSessionHandler(TestCase):
@@ -22,7 +22,7 @@ class TestAccountSessionHandler(TestCase):
 
     def setUp(self):
         self.account = create.create_account(
-            f"TestAccount{randint(0, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(0, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -124,7 +124,7 @@ class TestDefaultAccountAuth(BaseEvenniaTest):
         self.password = "testpassword"
         self.account.delete()
         self.account = create.create_account(
-            f"TestAccount{randint(100000, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(100000, 999999)}",
             email="test@test.com",
             password=self.password,
             typeclass=DefaultAccount,
@@ -187,7 +187,7 @@ class TestDefaultAccountAuth(BaseEvenniaTest):
         "Check password validators deny bad passwords"
 
         account = create.create_account(
-            f"TestAccount{randint(100000, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(100000, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -203,7 +203,7 @@ class TestDefaultAccountAuth(BaseEvenniaTest):
     def test_password_change(self):
         "Check password setting and validation is working as expected"
         account = create.create_account(
-            f"TestAccount{randint(100000, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(100000, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -251,7 +251,7 @@ class TestDefaultAccount(TestCase):
         "Check puppet_object method called, already puppeting this"
 
         account = create.create_account(
-            f"TestAccount{randint(0, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(0, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -274,7 +274,7 @@ class TestDefaultAccount(TestCase):
         "Check puppet_object method called, no permission"
 
         account = create.create_account(
-            f"TestAccount{randint(0, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(0, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -298,7 +298,7 @@ class TestDefaultAccount(TestCase):
         "Check puppet_object method called, joining other session"
 
         account = create.create_account(
-            f"TestAccount{randint(0, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(0, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,
@@ -326,7 +326,7 @@ class TestDefaultAccount(TestCase):
         "Check puppet_object method called, already puppeted"
 
         account = create.create_account(
-            f"TestAccount{randint(0, 999999)}",
+            f"TestAccount{secrets.SystemRandom().randint(0, 999999)}",
             email="test@test.com",
             password="testpassword",
             typeclass=DefaultAccount,

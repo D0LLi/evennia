@@ -99,12 +99,12 @@ many attributes and hook methods you can overload to create complex, interrelate
 
 """
 import time
-from random import random
 
 from evennia import Command
 from evennia.server import signals
 from evennia.typeclasses.attributes import AttributeProperty
 from evennia.utils import search, utils
+import secrets
 
 
 class BaseBuff:
@@ -485,7 +485,7 @@ class BuffHandler:
             if source:
                 mix = str(source.dbref).replace("#", "")
             elif not (buff.unique or buff.refresh) or not source:
-                mix = "_ufrf" + str(int((random() * 999999) * 100000))
+                mix = "_ufrf" + str(int((secrets.SystemRandom().random() * 999999) * 100000))
 
             buffkey = buff.key if buff.unique is True else buff.key + mix
 

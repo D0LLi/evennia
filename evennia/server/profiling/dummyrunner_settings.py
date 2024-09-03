@@ -57,8 +57,8 @@ commands (such as creating an account and logging in).
 ----
 
 """
-import random
 import string
+import secrets
 
 # Dummy runner settings
 
@@ -87,7 +87,7 @@ TELNET_PORT = None
 
 DUMMY_NAME = "Dummy_{gid}"
 DUMMY_PWD = (
-    "".join(random.choice(string.ascii_letters + string.digits) for _ in range(20)) + "-{gid}"
+    "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(20)) + "-{gid}"
 )
 START_ROOM = "testing_room_start_{gid}"
 ROOM_TEMPLATE = "testing_room_%s"

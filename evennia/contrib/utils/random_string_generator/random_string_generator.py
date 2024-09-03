@@ -52,10 +52,10 @@ available.
 import re
 import string
 import time
-from random import choice, randint, seed
 
 from evennia import DefaultScript, ScriptDB
 from evennia.utils.create import create_script
+import secrets
 
 
 class RejectedRegex(RuntimeError):
@@ -307,10 +307,10 @@ class RandomStringGenerator:
         # Generate a pseudo-random string that might be used already
         result = ""
         for element in self.elements:
-            number = randint(element["min"], element["max"])
+            number = secrets.SystemRandom().randint(element["min"], element["max"])
             chars = element["chars"]
             for index in range(number):
-                char = choice(chars)
+                char = secrets.choice(chars)
                 result += char
 
         # If the string has already been generated, try again
@@ -319,7 +319,7 @@ class RandomStringGenerator:
             epoch = time.time()
             while result in generated:
                 epoch += 1
-                seed(epoch)
+                secrets.SystemRandom().seed(epoch)
                 result = self.get(store=False, unique=False)
 
         if store:

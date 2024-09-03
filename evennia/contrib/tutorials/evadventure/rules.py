@@ -7,10 +7,10 @@ and determining what the outcome is.
 ----
 
 """
-from random import randint
 
 from .enums import Ability
 from .random_tables import death_and_dismemberment as death_table
+import secrets
 
 # Basic rolls
 
@@ -63,7 +63,7 @@ class EvAdventureRollEngine:
             raise TypeError(f"Invalid die-size used (must be between 1 and {max_diesize} sides)")
 
         # At this point we know we have valid input - roll and add dice together
-        return sum(randint(1, diesize) for _ in range(number))
+        return sum(secrets.SystemRandom().randint(1, diesize) for _ in range(number))
 
     def roll_with_advantage_or_disadvantage(self, advantage=False, disadvantage=False):
         """

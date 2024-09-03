@@ -30,9 +30,6 @@ in your settings. See utils.dummyrunner_actions.py
 for instructions on how to define this module.
 
 """
-
-
-import random
 import sys
 import time
 from argparse import ArgumentParser
@@ -41,6 +38,7 @@ import django
 from twisted.conch import telnet
 from twisted.internet import protocol, reactor
 from twisted.internet.task import LoopingCall
+import secrets
 
 django.setup()
 import evennia  # noqa
@@ -406,7 +404,7 @@ class DummyClient(telnet.StatefulTelnetProtocol):
                 d = LoopingCall(self.step)
                 df = max(abs(TIMESTEP * 0.001), min(TIMESTEP / 10, 0.5))
                 # dither next attempt with random time
-                timestep = TIMESTEP + (-df + (random.random() * df))
+                timestep = TIMESTEP + (-df + (secrets.SystemRandom().random() * df))
                 d.start(timestep, now=True).addErrback(self.error)
                 self.connection_attempt += 1
 
@@ -499,7 +497,7 @@ class DummyClient(telnet.StatefulTelnetProtocol):
         """
         global NLOGGING_IN, NLOGIN_SCREEN
 
-        rand = random.random()
+        rand = secrets.SystemRandom().random()
 
         if not self._cmdlist:
             # no commands ready. Load some.
@@ -518,7 +516,7 @@ class DummyClient(telnet.StatefulTelnetProtocol):
                     return
             else:
                 # we always pick a cumulatively random function
-                crand = random.random()
+                crand = secrets.SystemRandom().random()
                 cfunc = [func for (cprob, func) in self._actions if cprob >= crand][0]
                 self._cmdlist = list(makeiter(cfunc(self)))
 

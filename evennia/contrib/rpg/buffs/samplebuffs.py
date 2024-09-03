@@ -1,6 +1,6 @@
-import random
 
 from .buff import BaseBuff, Mod
+import secrets
 
 
 class Exploit(BaseBuff):
@@ -26,7 +26,7 @@ class Exploit(BaseBuff):
 
     def at_trigger(self, trigger: str, *args, **kwargs):
         chance = self.stacks / 20
-        roll = random.random()
+        roll = secrets.SystemRandom().random()
 
         if chance > roll:
             self.handler.add(Exploited)

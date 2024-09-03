@@ -66,14 +66,13 @@ to your game's 'world' folder and modify it there rather than importing it
 in your game and using it as-is.
 """
 
-from random import randint
-
 from evennia import TICKER_HANDLER as tickerhandler
 from evennia import Command, default_cmds
 from evennia.commands.default.muxcommand import MuxCommand
 from evennia.prototypes.spawner import spawn
 
 from . import tb_basic
+import secrets
 
 """
 ----------------------------------------------------------------------------
@@ -124,7 +123,7 @@ class ItemCombatRules(tb_basic.BasicCombatRules):
             so that attack items' accuracy is affected as well.
         """
         # For this example, just return a random integer up to 100.
-        attack_value = randint(1, 100)
+        attack_value = secrets.SystemRandom().randint(1, 100)
         # Add to the roll if the attacker has the "Accuracy Up" condition.
         if "Accuracy Up" in attacker.db.conditions:
             attack_value += ACC_UP_MOD
@@ -178,7 +177,7 @@ class ItemCombatRules(tb_basic.BasicCombatRules):
             conditions.
         """
         # For this example, just generate a number between 15 and 25.
-        damage_value = randint(15, 25)
+        damage_value = secrets.SystemRandom().randint(15, 25)
         # Add to damage roll if attacker has the "Damage Up" condition.
         if "Damage Up" in attacker.db.conditions:
             damage_value += DMG_UP_MOD
@@ -419,7 +418,7 @@ class ItemCombatRules(tb_basic.BasicCombatRules):
             min_healing = kwargs["healing_range"][0]
             max_healing = kwargs["healing_range"][1]
 
-        to_heal = randint(min_healing, max_healing)  # Restore 20 to 40 hp
+        to_heal = secrets.SystemRandom().randint(min_healing, max_healing)  # Restore 20 to 40 hp
         if target.db.hp + to_heal > target.db.max_hp:
             to_heal = target.db.max_hp - target.db.hp  # Cap healing to max HP
         target.db.hp += to_heal
@@ -533,8 +532,8 @@ class ItemCombatRules(tb_basic.BasicCombatRules):
             inflict_condition = kwargs["inflict_condition"]
 
         # Roll attack and damage
-        attack_value = randint(1, 100) + accuracy
-        damage_value = randint(min_damage, max_damage)
+        attack_value = secrets.SystemRandom().randint(1, 100) + accuracy
+        damage_value = secrets.SystemRandom().randint(min_damage, max_damage)
 
         # Account for "Accuracy Up" and "Accuracy Down" conditions
         if "Accuracy Up" in user.db.conditions:
@@ -763,7 +762,7 @@ class TBItemsCharacter(tb_basic.TBBasicCharacter):
         """
         # Regeneration: restores 4 to 8 HP at the start of character's turn
         if "Regeneration" in self.db.conditions:
-            to_heal = randint(REGEN_RATE[0], REGEN_RATE[1])  # Restore HP
+            to_heal = secrets.SystemRandom().randint(REGEN_RATE[0], REGEN_RATE[1])  # Restore HP
             if self.db.hp + to_heal > self.db.max_hp:
                 to_heal = self.db.max_hp - self.db.hp  # Cap healing to max HP
             self.db.hp += to_heal
@@ -771,7 +770,7 @@ class TBItemsCharacter(tb_basic.TBBasicCharacter):
 
         # Poisoned: does 4 to 8 damage at the start of character's turn
         if "Poisoned" in self.db.conditions:
-            to_hurt = randint(POISON_RATE[0], POISON_RATE[1])  # Deal damage
+            to_hurt = secrets.SystemRandom().randint(POISON_RATE[0], POISON_RATE[1])  # Deal damage
             self.rules.apply_damage(self, to_hurt)
             self.location.msg_contents("%s takes %i damage from being Poisoned." % (self, to_hurt))
             if self.db.hp <= 0:

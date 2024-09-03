@@ -5,11 +5,10 @@ object based on that mobile class.
 
 """
 
-import random
-
 from evennia import TICKER_HANDLER, CmdSet, Command, logger, search_object
 
 from . import objects as tut_objects
+import secrets
 
 
 class CmdMobOnOff(Command):
@@ -304,8 +303,8 @@ class Mob(tut_objects.TutorialObject):
         order to block the mob from moving outside its area while
         allowing account-controlled characters to move normally.
         """
-        if random.random() < 0.01 and self.db.irregular_msgs:
-            self.location.msg_contents(random.choice(self.db.irregular_msgs))
+        if secrets.SystemRandom().random() < 0.01 and self.db.irregular_msgs:
+            self.location.msg_contents(secrets.choice(self.db.irregular_msgs))
         if self.db.aggressive:
             # first check if there are any targets in the room.
             target = self._find_target(self.location)
@@ -316,7 +315,7 @@ class Mob(tut_objects.TutorialObject):
         exits = [exi for exi in self.location.exits if exi.access(self, "traverse")]
         if exits:
             # randomly pick an exit
-            exit = random.choice(exits)
+            exit = secrets.choice(exits)
             # move there.
             self.move_to(exit.destination)
         else:
@@ -329,8 +328,8 @@ class Mob(tut_objects.TutorialObject):
         scans adjacent rooms for enemies and moves towards them to
         attack if possible.
         """
-        if random.random() < 0.01 and self.db.irregular_msgs:
-            self.location.msg_contents(random.choice(self.db.irregular_msgs))
+        if secrets.SystemRandom().random() < 0.01 and self.db.irregular_msgs:
+            self.location.msg_contents(secrets.choice(self.db.irregular_msgs))
         if self.db.aggressive:
             # first check if there are any targets in the room.
             target = self._find_target(self.location)
@@ -360,8 +359,8 @@ class Mob(tut_objects.TutorialObject):
         the mob will bring its weapons to bear on any targets
         in the room.
         """
-        if random.random() < 0.01 and self.db.irregular_msgs:
-            self.location.msg_contents(random.choice(self.db.irregular_msgs))
+        if secrets.SystemRandom().random() < 0.01 and self.db.irregular_msgs:
+            self.location.msg_contents(secrets.choice(self.db.irregular_msgs))
         # first make sure we have a target
         target = self._find_target(self.location)
         if not target:
@@ -372,7 +371,7 @@ class Mob(tut_objects.TutorialObject):
         # we use the same attack commands as defined in
         # tutorial_world.objects.TutorialWeapon, assuming that
         # the mob is given a Weapon to attack with.
-        attack_cmd = random.choice(("thrust", "pierce", "stab", "slash", "chop"))
+        attack_cmd = secrets.choice(("thrust", "pierce", "stab", "slash", "chop"))
         self.execute_cmd("%s %s" % (attack_cmd, target))
 
         # analyze the current state

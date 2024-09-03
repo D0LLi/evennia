@@ -45,7 +45,6 @@ The `FuncParser` also accepts a direct dict mapping of `{'name': callable, ...}`
 """
 import dataclasses
 import inspect
-import random
 
 from django.conf import settings
 from evennia.utils import logger, search
@@ -61,6 +60,7 @@ from evennia.utils.utils import (
 )
 from evennia.utils.verb_conjugation.conjugate import verb_actor_stance_components
 from evennia.utils.verb_conjugation.pronouns import pronoun_to_viewpoints
+import secrets
 
 # setup
 
@@ -832,9 +832,9 @@ def funcparser_callable_random(*args, **kwargs):
 
     try:
         if isinstance(minval, float) or isinstance(maxval, float):
-            return minval + ((maxval - minval) * random.random())
+            return minval + ((maxval - minval) * secrets.SystemRandom().random())
         else:
-            return random.randint(minval, maxval)
+            return secrets.SystemRandom().randint(minval, maxval)
     except Exception:
         if kwargs.get("raise_errors"):
             raise
@@ -884,7 +884,7 @@ def funcparser_callable_choice(*args, **kwargs):
     if not args:
         return ""
     try:
-        return random.choice(args)
+        return secrets.choice(args)
     except Exception:
         if kwargs.get("raise_errors"):
             raise

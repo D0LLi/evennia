@@ -4,7 +4,6 @@ Unit tests for the prototypes and spawner
 """
 
 import uuid
-from random import randint, sample
 from time import time
 
 import mock
@@ -20,6 +19,7 @@ from evennia.prototypes.prototypes import _PROTOTYPE_TAG_META_CATEGORY
 from evennia.utils.create import create_object
 from evennia.utils.test_resources import BaseEvenniaTest, EvenniaCommandTest
 from evennia.utils.tests.test_evmenu import TestEvMenu
+import secrets
 
 _PROTPARENTS = {
     "NOBODY": {},
@@ -27,7 +27,7 @@ _PROTPARENTS = {
         "prototype_key": "GOBLIN",
         "typeclass": "evennia.objects.objects.DefaultObject",
         "key": "goblin grunt",
-        "health": lambda: randint(1, 1),
+        "health": lambda: secrets.SystemRandom().randint(1, 1),
         "resists": ["cold", "poison"],
         "attacks": ["fists"],
         "weaknesses": ["fire", "light"],
@@ -953,7 +953,7 @@ class PrototypeCrashTest(BaseEvenniaTest):
             prot = {
                 "prototype_key": str(uuid.uuid4()),
                 "some_attributes": [str(uuid.uuid4()) for x in range(10)],
-                "prototype_tags": list(sample(["demo", "test", "stuff"], 2)),
+                "prototype_tags": list(secrets.SystemRandom().sample(["demo", "test", "stuff"], 2)),
             }
             protlib.save_prototype(prot)
 

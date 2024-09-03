@@ -65,14 +65,13 @@ NAMEGEN_FANTASY_RULES = {
     }
 
 """
-
-import random
 import re
 from os import path
 
 from django.conf import settings
 
 from evennia.utils.utils import is_iter
+import secrets
 
 # Load name data from Behind the Name lists
 dirpath = path.dirname(path.abspath(__file__))
@@ -275,14 +274,14 @@ def fantasy_name(num=1, style="harsh", return_list=False):
     # time to generate a name!
     for n in range(num):
         # build a list of syllables
-        length = random.randint(*style_dict["length"])
+        length = secrets.SystemRandom().randint(*style_dict["length"])
         name = ""
         for i in range(length):
             # build the syllable itself
             syll = ""
             for sound, weight in syllable:
                 # random chance to skip this key; lower weights mean less likely
-                if random.randint(0, 8) > weight:
+                if secrets.SystemRandom().randint(0, 8) > weight:
                     continue
 
                 if sound not in style_dict:
@@ -301,7 +300,7 @@ def fantasy_name(num=1, style="harsh", return_list=False):
                     elif i + 1 == length:
                         choices += style_dict.get("end", [])
 
-                syll += random.choice(choices)
+                syll += secrets.choice(choices)
 
             name += syll
 
@@ -349,7 +348,7 @@ def first_name(
         name_options = [name_data[0] for name_data in _FIRSTNAME_LIST]
 
     # take a random selection of `num` names, without repeats
-    results = random.sample(name_options, num)
+    results = secrets.SystemRandom().sample(name_options, num)
 
     if len(results) == 1 and not return_list:
         # return single value as a string
@@ -373,7 +372,7 @@ def last_name(num=1, return_list=False):
         raise ValueError("Number of names to generate must be positive.")
 
     # take a random selection of `num` names, without repeats
-    results = random.sample(_SURNAME_LIST, num)
+    results = secrets.SystemRandom().sample(_SURNAME_LIST, num)
 
     if len(results) == 1 and not return_list:
         # return single value as a string
@@ -413,7 +412,7 @@ def full_name(num=1, parts=2, gender=None, return_list=False, surname_first=Fals
         # we want them to be an intelligent mix of personal names and family names
         # first, split the total number of middle-name parts into "personal" and "family" at a random point
         total_mids = middle * num
-        personals = random.randint(1, total_mids)
+        personals = secrets.SystemRandom().randint(1, total_mids)
         familys = total_mids - personals
         # then get the names for each
         personal_mids = first_name(num=personals, gender=gender, return_list=True)
