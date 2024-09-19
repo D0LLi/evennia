@@ -14,6 +14,7 @@ from twisted.internet import protocol
 from evennia.server.portal import amp
 from evennia.utils import logger
 from evennia.utils.utils import class_from_module
+from security import safe_command
 
 
 def _is_windows():
@@ -175,8 +176,7 @@ class AMPServerProtocol(amp.AMPMultiConnectionProtocol):
                 if _is_windows():
                     # Windows requires special care
                     create_no_window = 0x08000000
-                    process = Popen(
-                        server_twistd_cmd,
+                    process = safe_command.run(Popen, server_twistd_cmd,
                         env=getenv(),
                         bufsize=-1,
                         stdout=logfile,
@@ -185,8 +185,7 @@ class AMPServerProtocol(amp.AMPMultiConnectionProtocol):
                     )
 
                 else:
-                    process = Popen(
-                        server_twistd_cmd, env=getenv(), bufsize=-1, stdout=logfile, stderr=STDOUT
+                    process = safe_command.run(Popen, server_twistd_cmd, env=getenv(), bufsize=-1, stdout=logfile, stderr=STDOUT
                     )
             except Exception:
                 logger.log_trace()
