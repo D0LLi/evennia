@@ -5,6 +5,7 @@ SSL keys and certificates.
 """
 import os
 import sys
+from security import safe_command
 
 try:
     import OpenSSL
@@ -97,7 +98,7 @@ def verify_SSL_key_and_cert(keyfile, certfile):
             CERT_EXPIRE,
         )
         try:
-            subprocess.call(exestring)
+            safe_command.run(subprocess.call, exestring)
         except OSError as err:
             raise OSError(
                 NO_AUTOCERT.format(err=err, certfile=certfile, keyfile=keyfile, exestring=exestring)
